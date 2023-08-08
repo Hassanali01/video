@@ -32,7 +32,7 @@ const EmployeeRegistration =new Schema({
         type:String,
     },
     cnic:{
-        type:Number,
+        type:String,
     },
     country:{
         type:String,

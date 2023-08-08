@@ -60,16 +60,36 @@ const updateEmployee = async(req,res)=>{
 
 //for delete employee
 
-const deleteEmployee = async(req,res)=>{
-    const {id}= req.params
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(400).json({error:"No Such Employee"})
+// const deleteEmployee = async(req,res)=>{
+//     const {id}= req.params
+//     if(!mongoose.Types.ObjectId.isValid(id)){
+//         return res.status(400).json({error:"No Such Employee"})
+//     }
+//     const Employee = await EmployeeRegistration.findByIdAndDelete({_id:id})
+//     if (!Employee){
+//         return res.status(400).json({error:"No Such Employee"})
+//     }
+//     res.status(200).json(Employee)
+// }
+
+const deleteEmployee = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ error: "Invalid Employee ID" });
+        }
+
+        const employee = await EmployeeRegistration.findByIdAndDelete({_id:id});
+
+        if (!employee) {
+            return res.status(404).json({ error: "Employee not found" });
+        }
+
+        res.status(200).json({ message: "Employee deleted successfully" });
+    } catch (error) {
+        res.status(500).json({ error: "Internal server error" });
     }
-    const Employee = await EmployeeRegistration.findByIdAndDelete({_id:id})
-    if (!Employee){
-        return res.status(400).json({error:"No Such Employee"})
-    }
-    res.status(200).json(Employee)
-}
+};
 
 module.exports = {EmployeeReg,AllEmployee,singleEmployee,updateEmployee,deleteEmployee}
