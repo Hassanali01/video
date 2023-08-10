@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 const EmployeeRegistration =new Schema({
     first_name:{
         type:String,
-        required:true
+      
     },
     last_name:{
         type:String,
@@ -13,15 +13,15 @@ const EmployeeRegistration =new Schema({
     },
     mobile_no:{
         type:Number,
-        require:true
+
     },
     cnic:{
         type:String,
-        require:true
+        
     },
     gender:{
         type:String,
-        require:true
+  
     },
     email:{
         type:String,
@@ -51,6 +51,12 @@ const EmployeeRegistration =new Schema({
     },
     dob:{
         type:Date,
+    },
+    photo:{
+        type:String,
+    },
+    photo2:{
+        type:String,
     }
 
 },{timestamps:true})

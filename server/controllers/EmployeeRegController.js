@@ -1,13 +1,18 @@
 const EmployeeRegistration = require('../models/EmployeeReg')
 const mongoose = require('mongoose')
-//for register employee
 
-const EmployeeReg = async(req,res)=>{
-    const {first_name,last_name,cnic,gender,mobile_no,email,address,blood_group,age,dob,country,state,city} = req.body
+const EmployeeReg = async (req,res)=>{
+    const {first_name,last_name,cnic,gender,mobile_no,email,address,blood_group,age,dob,country,state,city,photo} = req.body
+    // const photo = req.file.photo
+    
+    console.log("req",req.body)
+
+   
     try{
         console.log("employeee")
-        const Employee = await EmployeeRegistration.create({first_name,last_name,cnic,gender,mobile_no,email,address,blood_group,age,dob,country,state,city})
+        const Employee = await EmployeeRegistration.create({first_name,last_name,cnic,gender,mobile_no,email,address,blood_group,age,dob,country,state,city,photo})
         res.status(200).json(Employee)
+        console.log("photo",photo)
     }catch(error){
         res.status(400).json({error:error.message})
     }
